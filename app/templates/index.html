@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prerrequisitos Loyola</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+</head>
+<body>
+
+<div class="container">
+    <h1>Prerrequisitos Ingenieria Loyola</h1>
+    <form action="/actividades" method="post" class="login-form">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <button onclick="loading()" type="submit">Iniciar sesión</button>
+    </form>
+
+    <div id="loading" style="display: none;">
+        <h2>Obteniendo datos...</h2>
+    </div>
+
+    {% if is_data %}
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in range(0, len)%} 
+      
+            <tr>
+                <td>{{data[i]['name']}}</td>
+                <td>{{data[i]['status']}}</td>
+            </tr>
+    {%endfor%} 
+    
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if is_data == False %}
+    <div>
+        <h2>Datos incorrectos o conexión de internet lenta</h2>
+    </div>
+    {% endif %}
+</div>
+
+
+
+<script type="text/javascript">
+    function loading(){
+     document.querySelector('#loading').style.display = 'inline-block';
+    }
+    </script>
+
+
+</body>
+</html>
